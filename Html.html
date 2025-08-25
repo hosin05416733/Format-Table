@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موسوعة صيغ الملفات الرقمية</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --video-color: #dc3545;
+            --image-color: #198754;
+            --ai-color: #6f42c1;
+            --disk-color: #fd7e14;
+            --archive-color: #20c997;
+            --document-color: #0dcaf0;
+            --audio-color: #ffc107;
+            --code-color: #0d6efd;
+            --executable-color: #6c757d;
+            --font-color: #e83e8c;
+            --database-color: #6610f2;
+            --system-color: #ff6b6b;
+            --shortcut-color: #17a2b8;
+            --spreadsheet-color: #6f42c1;
+            --presentation-color: #fd7e14;
+            --email-color: #20c997;
+            --game-color: #8d6e63;
+            --web-color: #e91e63;
+            --config-color: #607d8b;
+            --backup-color: #795548;
+            --text-color: #9c27b0;
+            --science-color: #009688;
+            --medical-color: #f44336;
+            --other-color: #adb5bd;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+            padding-top: 20px;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+        }
+        
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .category-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
+        .badge-video { background-color: var(--video-color); color: white; }
+        .badge-image { background-color: var(--image-color); color: white; }
+        .badge-ai { background-color: var(--ai-color); color: white; }
+        .badge-disk { background-color: var(--disk-color); color: white; }
+        .badge-archive { background-color: var(--archive-color); color: white; }
+        .badge-document { background-color: var(--document-color); color: black; }
+        .badge-audio { background-color: var(--audio-color); color: black; }
+        .badge-code { background-color: var(--code-color); color: white; }
+        .badge-executable { background-color: var(--executable-color); color: white; }
+        .badge-font { background-color: var(--font-color); color: white; }
+        .badge-database { background-color: var(--database-color); color: white; }
+        .badge-system { background-color: var(--system-color); color: white; }
+        .badge-shortcut { background-color: var(--shortcut-color); color: white; }
+        .badge-spreadsheet { background-color: var(--spreadsheet-color); color: white; }
+        .badge-presentation { background-color: var(--presentation-color); color: white; }
+        .badge-email { background-color: var(--email-color); color: white; }
+        .badge-game { background-color: var(--game-color); color: white; }
+        .badge-web { background-color: var(--web-color); color: white; }
+        .badge-config { background-color: var(--config-color); color: white; }
+        .badge-backup { background-color: var(--backup-color); color: white; }
+        .badge-text { background-color: var(--text-color); color: white; }
+        .badge-science { background-color: var(--science-color); color: white; }
+        .badge-medical { background-color: var(--medical-color); color: white; }
+        .badge-other { background-color: var(--other-color); color: white; }
+        
+        .stats-card {
+            transition: transform 0.3s;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(120deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 3rem 0;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .filter-buttons .btn {
+            margin: 3px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            padding: 5px 10px;
+        }
+        
+        .dataTables_filter input {
+            border-radius: 20px;
+            padding: 5px 15px;
+            border: 1px solid #ced4da;
+        }
+        
+        table.dataTable thead th {
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .pagination .page-link {
+            border-radius: 20px;
+            margin: 0 3px;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .format-icon {
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            margin-right: 10px;
+            font-weight: bold;
+            background: #f0f0f0;
+        }
+        
+        .format-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .scrollable-filters {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 10px;
+        }
+        
+        /* ألوان مخصصة لأزرار التصفية */
+        .btn-outline-purple {
+            color: #6f42c1;
+            border-color: #6f42c1;
+        }
+        .btn-outline-purple:hover {
+            color: #fff;
+            background-color: #6f42c1;
+            border-color: #6f42c1;
+        }
+        
+        .btn-outline-teal {
+            color: #20c997;
+            border-color: #20c997;
+        }
+        .btn-outline-teal:hover {
+            color: #fff;
+            background-color: #20c997;
+            border-color: #20c997;
+        }
+        
+        .btn-outline-orange {
+            color: #fd7e14;
+            border-color: #fd7e14;
+        }
+        .btn-outline-orange:hover {
+            color: #fff;
+            background-color: #fd7e14;
+            border-color: #fd7e14;
+        }
+        
+        .btn-outline-cyan {
+            color: #17a2b8;
+            border-color: #17a2b8;
+        }
+        .btn-outline-cyan:hover {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+        
+        .btn-outline-pink {
+            color: #e83e8c;
+            border-color: #e83e8c;
+        }
+        .btn-outline-pink:hover {
+            color: #fff;
+            background-color: #e83e8c;
+            border-color: #e83e8c;
+        }
+        
+        .btn-outline-indigo {
+            color: #6610f2;
+            border-color: #6610f2;
+        }
+        .btn-outline-indigo:hover {
+            color: #fff;
+            background-color: #6610f2;
+            border-color: #6610f2;
+        }
+        
+        .btn-outline-brown {
+            color: #8d6e63;
+            border-color: #8d6e63;
+        }
+        .btn-outline-brown:hover {
+            color: #fff;
+            background-color: #8d6e63;
+            border-color: #8d6e63;
+        }
+        
+        .btn-outline-web {
+            color: #e91e63;
+            border-color: #e91e63;
+        }
+        .btn-outline-web:hover {
+            color: #fff;
+            background-color: #e91e63;
+            border-color: #e91e63;
+        }
+        
+        .btn-outline-config {
+            color: #607d8b;
+            border-color: #607d8b;
+        }
+        .btn-outline-config:hover {
+            color: #fff;
+            background-color: #607d8b;
+            border-color: #607d8b;
+        }
+        
+        .btn-outline-backup {
+            color: #795548;
+            border-color: #795548;
+        }
+        .btn-outline-backup:hover {
+            color: #fff;
+            background-color: #795548;
+            border-color: #795548;
+        }
+        
+        .btn-outline-text {
+            color: #9c27b0;
+            border-color: #9c27b0;
+        }
+        .btn-outline-text:hover {
+            color: #fff;
+            background-color: #9c27b0;
+            border-color: #9c27b0;
+        }
+        
+        .btn-outline-science {
+            color: #009688;
+            border-color: #009688;
+        }
+        .btn-outline-science:hover {
+            color: #fff;
+            background-color: #009688;
+            border-color: #009688;
+        }
+        
+        .btn-outline-medical {
+            color: #f44336;
+            border-color: #f44336;
+        }
+        .btn-outline-medical:hover {
+            color: #fff;
+            background-color: #f44336;
+            border-color: #f44336;
+        }
+        
+        /* ألوان خلفية للإحصائيات */
+        .bg-purple { background-color: #6f42c1; }
+        .bg-teal { background-color: #20c997; }
+        .bg-orange { background-color: #fd7e14; }
+        .bg-cyan { background-color: #17a2b8; }
+        .bg-pink { background-color: #e83e8c; }
+        .bg-indigo { background-color: #6610f2; }
+        .bg-brown { background-color: #8d6e63; }
+        .bg-web { background-color: #e91e63; }
+        .bg-config { background-color: #607d8b; }
+        .bg-backup { background-color: #795548; }
+        .bg-text { background-color: #9c27b0; }
+        .bg-science { background-color: #009688; }
+        .bg-medical { background-color: #f44336; }
+    </style>
+    
+    <!-- Google Fonts - Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- شريط التنقل -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-4">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-file-alt me-2"></i>موسوعة صيغ الملفات
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> الرئيسية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-info-circle me-1"></i> حول المشروع</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i> اتصل بنا</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- قسم البطاقة الرئيسية -->
+        <div class="hero-section text-center">
+            <h1 class="display-5 fw-bold">دليل شامل لصيغ الملفات الرقمية</h1>
+            <p class="lead">استكشف 750 صيغة ملف مع شرح مفصل وتصنيف دقيق</p>
+            <div class="mt-4">
+                <div class="input-group mx-auto" style="max-width: 500px;">
+                    <input type="text" id="globalSearch" class="form-control form-control-lg" placeholder="ابحث عن صيغة ملف...">
+                    <button class="btn btn-light btn-lg" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- الإحصائيات -->
+        <div class="row" id="statsRow">
+            <!-- سيتم ملؤها بواسطة JavaScript -->
+        </div>
+
+        <!-- الفلاتر -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-filter me-2"></i>تصفية النتائج حسب النوع</h5>
+                <div class="scrollable-filters">
+                    <div class="filter-buttons text-center">
+                        <button class="btn btn-outline-danger filter-btn active" data-filter="all">الكل</button>
+                        <button class="btn btn-outline-danger filter-btn" data-filter="فيديو">فيديو</button>
+                        <button class="btn btn-outline-success filter-btn" data-filter="صور">صور</button>
+                        <button class="btn btn-outline-warning filter-btn" data-filter="صوت">صوت</button>
+                        <button class="btn btn-outline-info filter-btn" data-filter="مستندات">مستندات</button>
+                        <button class="btn btn-outline-purple filter-btn" data-filter="جداول">جداول</button>
+                        <button class="btn btn-outline-orange filter-btn" data-filter="عروض">عروض</button>
+                        <button class="btn btn-outline-teal filter-btn" data-filter="ملفات مضغوطة">مضغوطة</button>
+                        <button class="btn btn-outline-dark filter-btn" data-filter="تنفيذية">تنفيذية</button>
+                        <button class="btn btn-outline-cyan filter-btn" data-filter="اختصارات">اختصارات</button>
+                        <button class="btn btn-outline-primary filter-btn" data-filter="أكواد">أكواد</button>
+                        <button class="btn btn-outline-pink filter-btn" data-filter="خطوط">خطوط</button>
+                        <button class="btn btn-outline-indigo filter-btn" data-filter="قواعد بيانات">قواعد بيانات</button>
+                        <button class="btn btn-outline-secondary filter-btn" data-filter="أنظمة">أنظمة</button>
+                        <button class="btn btn-outline-green filter-btn" data-filter="بريد إلكتروني">بريد</button>
+                        <button class="btn btn-outline-brown filter-btn" data-filter="ألعاب">ألعاب</button>
+                        <button class="btn btn-outline-web filter-btn" data-filter="ويب">ويب</button>
+                        <button class="btn btn-outline-config filter-btn" data-filter="تهيئة">تهيئة</button>
+                        <button class="btn btn-outline-backup filter-btn" data-filter="نسخ احتياطي">نسخ احتياطي</button>
+                        <button class="btn btn-outline-text filter-btn" data-filter="نصوص">نصوص</button>
+                        <button class="btn btn-outline-science filter-btn" data-filter="علمية">علمية</button>
+                        <button class="btn btn-outline-medical filter-btn" data-filter="طبية">طبية</button>
+                        <button class="btn btn-outline-brown filter-btn" data-filter="نماذج ذكاء اصطناعي">ذكاء اصطناعي</button>
+                        <button class="btn btn-outline-warning filter-btn" data-filter="اسطوانات مضغوطة">اسطوانات</button>
+                        <button class="btn btn-outline-light filter-btn text-dark" data-filter="أخرى">أخرى</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الجدول -->
+        <div class="card">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="fas fa-table me-2"></i>جدول صيغ الملفات</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="formatsTable" class="table table-hover table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>الصيغة</th>
+                                <th>النوع</th>
+                                <th>الوصف</th>
+                                <th>الشائع</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- سيتم ملؤها بواسطة JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-5">
+            <p>© 2025 موسوعة صيغ الملفات. جميع الحقوق محفوظة.</p>
+            <div class="mt-2">
+                <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-github fa-lg"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        // ---------- أيقونات الصيغ (يمكن إضافة أيقونات أخرى هنا بنفس الأسلوب) ----------
+        // مثال: أيقونة مضمنة لـ WPP (SVG مُشفّر base64). استبدل / أضف المزيد حسب الحاجة.
+        const formatIcons = {
+            "WPP": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iI2ZkN2UxNCIvPjxyZWN0IHg9IjYiIHk9IjEwIiB3aWR0aD0iNTIiIGhlaWdodD0iMzYiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjx0ZXh0IHg9IjMyIiB5PSIzNiIgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMzMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5XUFA8L3RleHQ+PC9zdmc+"
+        };
+
+        // ---------- أمثلة الصيغ حسب النوع ----------
+        const formatExamples = {
+            "فيديو": ["MP4", "AVI", "MKV", "MOV", "WMV", "FLV", "WEBM", "MPEG", "MPG", "M4V", "3GP", "3G2", "TS", "M2TS", "MTS", "DIVX", "F4V", "OGV", "VOB", "RM", "RMVB", "ASF", "AMV", "DRC", "SWF", "MXV", "M4P", "M4V", "SVI", "F4P", "F4A", "F4B"],
+            "صور": ["JPG", "JPEG", "PNG", "GIF", "BMP", "TIFF", "TIF", "SVG", "WEBP", "RAW", "CR2", "NEF", "ARW", "PSD", "AI", "EPS", "ICO", "EXIF", "HEIC", "PPM", "PGM", "PBM", "PNM", "HDR", "XCF", "CIN", "DDS", "DIB", "DNG", "ECW", "EXR", "FITS"],
+            "صوت": ["MP3", "WAV", "FLAC", "AAC", "M4A", "WMA", "OGG", "OPUS", "AMR", "AIFF", "AU", "RA", "MID", "MIDI", "AC3", "MKA", "WV", "SPX", "GSM", "VOX", "DTS", "APE", "MPC", "OTS", "SPX", "VOC", "8SVX", "CDDA", "CVS", "DSS", "DVF", "GSM"],
+            "مستندات": ["DOC", "DOCX", "PDF", "TXT", "RTF", "ODT", "WPD", "WPS", "OXPS", "XPS", "TEX", "PAGES", "ABW", "ZABW", "DOT", "DOTX", "LOG", "MD", "TEMPLATE", "DVI", "DJVU", "EPUB", "FB2", "MOBI", "AZW", "LWP", "MCW", "NB", "UOF", "UOML", "WSD", "SXW"],
+            "جداول": ["XLS", "XLSX", "CSV", "ODS", "TSV", "XLSM", "XLSB", "XLTM", "XLTX", "NUMBERS", "DIF", "SLK", "SYLK", "QPW", "WB1", "WB2", "WB3", "123", "WKS", "WQ1", "WQ2", "XLW", "SDC", "VC", "WK1", "WK3", "WK4", "WKS", "WKU", "XLSHTML", "XLTM"],
+            "عروض": ["PPT", "PPTX", "ODP", "KEY", "PPS", "PPSX", "PPTML", "SWF", "SHW", "SHOW", "PRZ", "PEZ", "DPR", "DPX", "EGT", "FODP", "MMAP", "PRPROJ", "SDD", "STI", "THMX", "WPF", "EDX", "MPP", "MPX", "SHF", "SSP", "STP", "SXI", "WPF", "WPP"],
+            "ملفات مضغوطة": ["ZIP", "RAR", "7Z", "TAR", "GZ", "BZ2", "XZ", "LZ", "LZMA", "LZO", "Z", "CAB", "ARJ", "DEB", "RPM", "PKG", "MSI", "SIT", "SITX", "ACE", "ARC", "PAQ", "ZPAQ", "ZZ", "CRX", "ALZ", "APK", "APPX", "AR", "CPIO", "CUR", "CZIP"],
+            "تنفيذية": ["EXE", "MSI", "APP", "APK", "BAT", "CMD", "COM", "CGI", "IPA", "JAR", "PIF", "RUN", "WSF", "SH", "BIN", "ACTION", "COMMAND", "CPL", "GADGET", "INS", "INX", "ISU", "JOB", "MST", "MSP", "MACHO", "MSC", "OSX", "OUT", "PEF", "PRG", "PS1"],
+            "اختصارات": ["LNK", "URL", "WEBLOC", "ALIAS", "APPREF-MS", "DESKLINK", "SHORTCUT", "SYMLINK", "Favorites", "LIBRARY-MS", "GUID", "OFT", "VBE", "VBS", "WSH", "SCF", "PIF", "QTP", "SHS", "SCT", "VBSCRIPT", "WIZ", "MSC", "MHT", "MHTML", "NAL", "RDP", "REF", "SHS", "VBD", "VBE", "WS"],
+            "أكواد": ["JS", "PY", "JAVA", "CPP", "C", "CS", "PHP", "RB", "GO", "HTML", "HTM", "CSS", "XML", "JSON", "SQL", "PL", "PM", "R", "SWIFT", "KT", "VB", "ASP", "ASPX", "JSP", "ERB", "AS", "ASM", "BAS", "CLJ", "COFFEE", "CPP", "CSHARP", "D"],
+            "خطوط": ["TTF", "OTF", "FNT", "FON", "WOFF", "WOFF2", "EOT", "DFONT", "PFB", "PFM", "AFM", "PFA", "SUIT", "TTC", "OTC", "SFD", "UFO", "VLW", "F3F", "FEA", "GLIF", "VFB", "MAP", "CHR", "BDF", "FONTDATA", "GDR", "MCF", "PFR", "PMT", "SFP", "T65"],
+            "قواعد بيانات": ["DB", "SQLITE", "MDB", "ACCDB", "DBF", "MDF", "NDF", "BAK", "SQL", "CSV", "TSV", "DTSX", "FMP", "FM5", "FP5", "FP7", "KEXI", "KEXIC", "MYD", "MYI", "ORA", "PDB", "SDF", "UDL", "WDB", "4DB", "ACCDE", "ACCDR", "ACCDT", "ADT", "DB3", "DBC"],
+            "أنظمة": ["DLL", "SYS", "DRV", "VXD", "OCX", "CPL", "TLB", "OLB", "DMP", "CAB", "MSI", "MSP", "MSU", "MSC", "SCR", "HTA", "ICS", "IME", "ITS", "JAM", "JOB", "KBD", "KYC", "LDF", "LRC", "386", "ADT", "BPL", "CPL", "DEV", "DLLX", "DRV"],
+            "بريد إلكتروني": ["EML", "MSG", "PST", "OST", "MBOX", "EMLX", "VCF", "NSF", "OLK", "OFT", "MIM", "MHT", "MHTML", "PKM", "RPMSG", "ACX", "DBX", "EDB", "ENVELOPE", "FDB", "MBX", "OAB", "ODS", "PAB", "P7S", "PSTX", "TBB", "VCF", "WAB", "EMLX", "MBI"],
+            "ألعاب": ["SAV", "ROM", "ISO", "NES", "GB", "GBC", "GBA", "NDS", "3DS", "PSX", "PS2", "PSP", "XEX", "XBE", "DOL", "WAD", "PKG", "CIA", "JAR", "LOVE", "UNITY", "UASSET", "GAM", "SNES", "GG", "SMS", "MD", "SMC", "V64", "N64", "Z64"],
+            "ويب": ["HTML", "HTM", "CSS", "JS", "PHP", "ASP", "ASPX", "JSP", "XML", "JSON", "SVG", "WOFF", "WOFF2", "EOT", "TTF", "OTF", "ICO", "WEBM", "WEBP", "MANifest", "CRX", "XHTML", "XHT", "MHTML", "MHT", "DHTML", "SHTML", "JHTML", "CHTML", "RSS", "ATOM"],
+            "تهيئة": ["INI", "CFG", "CONF", "XML", "JSON", "YAML", "YML", "TOML", "PROPERTIES", "REG", "INF", "PLIST", "DESKTOP", "THEME", "SKIN", "PROFILE", "PREF", "SETTINGS", "OPT", "RC", "CNF", "CONFIG", "DEF", "POL", "PREFERENCE", "PROPS", "SETUP", "SYS", "TDL"],
+            "نسخ احتياطي": ["BAK", "TMP", "OLD", "BACKUP", "WBK", "BK", "BKUP", "BAC", "SAV", "SAVE", "BAK1", "BAK2", "ORIG", "COPY", "ARC", "BKP", "BKF", "BKS", "FBC", "GHO", "NRB", "QIC", "SPF", "TIB", "V2I", "VHD", "VMDK", "VMEM", "VMSD", "VMSN"],
+            "نصوص": ["TXT", "RTF", "MD", "TEX", "LOG", "ASC", "TEXT", "DOC", "DOCX", "ODT", "WPD", "PAGES", "WPS", "ABW", "ANS", "ASC", "ASCII", "BRF", "CNM", "CRT", "CSV", "CXX", "DIZ", "DOT", "DOTX", "EIO", "EUC", "FAX", "GL", "GPG", "GZ"],
+            "علمية": ["FITS", "CDF", "HDF", "HDF5", "NETCDF", "SDF", "ROOT", "MATH", "NB", "M", "MMA", "MMAT", "ODF", "SXM", "ODS", "OPJ", "ORI", "PKC", "QDW", "QPX", "QPH", "QPR", "QPT", "QXF", "SAS", "SAV", "SPC", "SPV", "SPW", "SXD"],
+            "طبية": ["DICOM", "DCM", "NII", "NIFTI", "MGH", "MGZ", "IMG", "HDR", "ANALYZE", "BRIK", "HEAD", "MNC", "MGH", "REC", "TRC", "EDF", "BDF", "GDF", "MFER", "SCP", "HL7", "XML", "PHILIPS", "SIEMENS", "GE", "CANON", "TOSHIBA", "SHIMADZU", "HITACHI", "BRUKER"],
+            "نماذج ذكاء اصطناعي": ["GGUF", "H5", "HDF5", "PKL", "PT", "PTH", "TF", "TFLITE", "ONNX", "PB", "MLMODEL", "NNET", "WEIGHTS", "BIN", "CKPT", "SAFE", "JOBLIB", "PMML", "GRAPH", "META", "INDEX", "DATA", "DATA-00000", "DATA-00001", "INDEX", "JSON", "CONFIG", "YAML", "YML"],
+            "اسطوانات مضغوطة": ["ISO", "CSO", "BIN", "CUE", "MDF", "MDS", "IMG", "CCD", "SUB", "NRG", "CDI", "B5T", "B6T", "DAA", "UIF", "PDI", "VCD", "BWT", "LCD", "MDX", "DMG", "TOAST", "VFD", "BWI", "B5I", "B6I", "CD", "DAO", "DFI", "GI", "IBP", "IBQ"],
+            "أخرى": ["TORRENT", "CUR", "ANI", "ICS", "PART", "CRDOWNLOAD", "DWG", "DXF", "SKP", "3DS", "MAX", "BLEND", "STL", "FBX", "OBJ", "DGN", "IGES", "STEP", "IGS", "3DM", "3MF", "AMF", "ASE", "DAE", "IFC", "IFF", "LWO", "LWS", "LXO", "MB", "MS3D"]
+        };
+
+        // ---------- أوصاف موجودة أصلًا ----------
+        const formatDescriptions = {
+            "MP4": "تنسيق فيديو مضغوط شائع الاستخدام في الفيديو عبر الإنترنت",
+            "AVI": "تنسيق حاوية فيديو طورته Microsoft",
+            "MKV": "تنسيق حاوية وسائط متعددة مفتوحة المصدر",
+            "MOV": "تنسيق فيديو طورته Apple لنظام QuickTime",
+            "WMV": "تنسيق فيديو مضغوط من Microsoft",
+            "FLV": "تنسيق فيديو كان يستخدم في Adobe Flash",
+            "WEBM": "تنسيق فيديو مفتوح المصدر للويب",
+            "MPEG": "تنسيق ضغط فيديو قياسي",
+            "MPG": "تنسيق فيديو مضغوط",
+            "M4V": "تنسيق فيديو لـ iTunes ومنتجات Apple",
+            "3GP": "تنسيق فيديو للهواتف المحمولة",
+            "3G2": "تنسيق فيديو للهواتف المحمولة من الجيل الثالث",
+            "TS": "تنسيق بث فيديو",
+            "M2TS": "تنسيق فيديو عالي الدقة لأقراص Blu-ray",
+            "MTS": "تنسيق فيديو للكاميرات الرقمية AVCHD",
+            "DIVX": "تنسيق فيديو مضغوط",
+            "F4V": "تنسيق فيديو لـ Adobe Flash",
+            "OGV": "تنسيق فيديو مفتوح المصدر",
+            "VOB": "تنسيق فيديو لأقراص DVD",
+            "RM": "تنسيق فيديو RealMedia",
+            "RMVB": "تنسيق فيديو RealMedia متغير المعدل",
+            "ASF": "تنسيق وسائط متقدمة من Microsoft",
+            "AMV": "تنسيق فيديو للوسائط المحمولة",
+            "DRC": "تنسيق فيديو لـ Google Draco",
+            "SWF": "تنسيق Shockwave Flash",
+            "JPG": "صورة مضغوطة مع خسارة في الجودة",
+            "JPEG": "صورة مضغوطة مع خسارة في الجودة",
+            "PNG": "صورة مضغوطة بدون خلفية",
+            "GIF": "صورة متحركة مضغوطة",
+            "BMP": "صورة غير مضغوطة",
+            "TIFF": "صورة عالية الجودة للطباعة",
+            "TIF": "صورة عالية الجودة للطباعة",
+            "SVG": "صورة متجهية قابلة للتطوير",
+            "WEBP": "صورة حديثة مضغوطة للويب",
+            "RAW": "صورة غير معالجة من الكاميرا",
+            "CR2": "صورة RAW من Canon",
+            "NEF": "صورة RAW من Nikon",
+            "ARW": "صورة RAW من Sony",
+            "PSD": "صورة Photoshop",
+            "AI": "صورة Adobe Illustrator",
+            "EPS": "صورة متجهية",
+            "ICO": "أيقونة صغيرة",
+            "EXIF": "بيانات وصفية للصورة",
+            "HEIC": "صورة عالية الكفاءة",
+            "PPM": "صورة Portable Pixmap",
+            "PGM": "صورة Portable Graymap",
+            "PBM": "صورة Portable Bitmap",
+            "PNM": "صورة Portable Anymap",
+            "HDR": "صورة High Dynamic Range",
+            "XCF": "صورة GIMP",
+            "MP3": "صوت مضغوط بشائع الاستخدام",
+            "WAV": "صوت غير مضغوط عالي الجودة",
+            "FLAC": "صوت مضغوط بدون خسارة",
+            "AAC": "صوت مضغوط متقدم",
+            "M4A": "صوت مضغوط لـ Apple",
+            "WMA": "صوت مضغوط من Microsoft",
+            "OGG": "صوت مفتوح المصدر مضغوط",
+            "OPUS": "صوت مضغوط عالي الكفاءة",
+            "AMR": "صوت مضغوط للهواتف المحمولة",
+            "AIFF": "صوت غير مضغوط من Apple",
+            "AU": "صوت غير مضغوط",
+            "RA": "صوت RealAudio",
+            "MID": "ملف آلات موسيقية",
+            "MIDI": "ملف آلات موسيقية",
+            "AC3": "صوت قناة صوتية رقمية",
+            "MKA": "حاوية صوت Matroska",
+            "WV": "صوت مضغوط بدون خسارة",
+            "SPX": "صوت مضغوط Speex",
+            "GSM": "صوت مضغوط للهواتف",
+            "VOX": "صوت مضغوط للهواتف",
+            "DTS": "صوت قناة صوتية رقمية",
+            "APE": "صوت مضغوط بدون خسارة",
+            "MPC": "صوت مضغوط MusePack",
+            "OTS": "صوت مضغوط Ogg",
+            "DOC": "مستند Microsoft Word",
+            "DOCX": "مستند Microsoft Word مفتوح",
+            "PDF": "مستند قابل للنقل",
+            "TXT": "ملف نصي",
+            "RTF": "نص منسق",
+            "ODT": "مستند OpenDocument",
+            "WPD": "مستند WordPerfect",
+            "WPS": "مستند WordPerfect",
+            "OXPS": "Open XML Paper Specification",
+            "XPS": "Open XML Paper Specification",
+            "TEX": "مستند LaTeX",
+            "PAGES": "مستند Apple Pages",
+            "ABW": "مستند AbiWord",
+            "ZABW": "مستند AbiWord مضغوط",
+            "DOT": "قالب Microsoft Word",
+            "DOTX": "قالب Microsoft Word مفتوح",
+            "LOG": "ملف السجل",
+            "MD": "مستند Markdown",
+            "TEMPLATE": "ملف القالب",
+            "DVI": "ملف DeVice Independent",
+            "DJVU": "مستند ممسوح ضوئيا",
+            "EPUB": "كتاب إلكتروني",
+            "FB2": "كتاب إلكتروني",
+            "MOBI": "كتاب إلكتروني",
+            "AZW": "كتاب إلكتروني Amazon",
+            "XLS": "جدول Microsoft Excel",
+            "XLSX": "جدول Microsoft Excel مفتوح",
+            "CSV": "قيم مفصولة بفواصل",
+            "ODS": "جدول OpenDocument",
+            "TSV": "قيم مفصولة بعلامات جدولة",
+            "XLSM": "جدول Excel بماكرو",
+            "XLSB": "جدول Excel ثنائي",
+            "XLTM": "قالب Excel بماكرو",
+            "XLTX": "قالب Excel مفتوح",
+            "NUMBERS": "جدول Apple Numbers",
+            "DIF": "تنسيق تبادل البيانات",
+            "SLK": "ملف تبادل رمزي",
+            "SYLK": "ملف تبادل رمزي",
+            "QPW": "جدول Quattro Pro",
+            "WB1": "جدول Quattro Pro",
+            "WB2": "جدول Quattro Pro",
+            "WB3": "جدول Quattro Pro",
+            "123": "جدول Lotus 1-2-3",
+            "WKS": "جدول Lotus",
+            "WQ1": "جدول Quattro Pro",
+            "WQ2": "جدول Quattro Pro",
+            "XLW": "كتاب عمل Excel",
+            "SDC": "جدول StarCalc",
+            "VC": "جدول Virtual Card",
+            "WK1": "جدول Lotus",
+            "PPT": "عرض Microsoft PowerPoint",
+            "PPTX": "عرض Microsoft PowerPoint مفتوح",
+            "ODP": "عرض OpenDocument",
+            "KEY": "عرض Apple Keynote",
+            "PPS": "عرض PowerPoint slideshow",
+            "PPSX": "عرض PowerPoint slideshow مفتوح",
+            "PPTML": "عرض PowerPoint بعلامات",
+            "SHW": "عرض Corel Show",
+            "SHOW": "عرض Corel Show",
+            "PRZ": "عرض Corel Presentation",
+            "PEZ": "عرض Prezi",
+            "DPR": "عرض Design Presentation",
+            "DPX": "عرض Design Presentation",
+            "EGT": "عرض egenda",
+            "FODP": "عرض OpenDocument مسطح",
+            "MMAP": "عرض MindManager",
+            "PRPROJ": "مشروع Adobe Premiere",
+            "SDD": "عرض StarOffice",
+            "STI": "عرض OpenDocument",
+            "THMX": "قالب PowerPoint",
+            "WPF": "عرض WordPerfect",
+            "EDX": "عرض Edraw",
+            "MPP": "مشروع Microsoft Project",
+            "MPX": "مشروع Microsoft Project",
+            "ZIP": "تنسيق ضغط ملفات شائع",
+            "RAR": "تنسيق ضغط ملفات",
+            "7Z": "تنسيق ضغط ملفات عالي الكفاءة",
+            "TAR": "تنسيق أرشيف يونكس",
+            "GZ": "أرشيف مضغوط بـ gzip",
+            "BZ2": "أرشيف مضغوط بـ bzip2",
+            "XZ": "أرشيف مضغوط بـ xz",
+            "LZ": "أرشيف مضغوط بـ lzip",
+            "LZMA": "أرشيف مضغوط بـ LZMA",
+            "LZO": "أرشيف مضغوط بـ LZO",
+            "Z": "أرشيف مضغوط بـ compress",
+            "CAB": "أرشيف Microsoft Cabinet",
+            "ARJ": "أرشيف مضغوط",
+            "DEB": "حزمة Debian",
+            "RPM": "حزمة Red Hat",
+            "PKG": "حزمة macOS",
+            "MSI": "حزمة Microsoft",
+            "SIT": "أرشيف StuffIt",
+            "SITX": "أرشيف StuffIt",
+            "ACE": "أرشيف مضغوط",
+            "ARC": "أرشيف مضغوط",
+            "PAQ": "أرشيف مضغوط",
+            "ZPAQ": "أرشيف مضغوط",
+            "ZZ": "أرشيف مضغوط للغاية",
+            "CRX": "امتداد Chrome",
+            "EXE": "ملف تنفيذي Windows",
+            "APP": "تطبيق macOS",
+            "APK": "تطبيق Android",
+            "BAT": "ملف دفعي Windows",
+            "CMD": "ملف دفعي Windows",
+            "COM": "ملف تنفيذي DOS",
+            "CGI": "برنامج نصي للبوابة العامة",
+            "IPA": "تطبيق iOS",
+            "JAR": "أرشيف Java",
+            "PIF": "برنامج معلومات محمول",
+            "RUN": "ملف تنفيذي Linux",
+            "WSF": "برنامج نصي Windows",
+            "SH": "برنامج نصي Linux",
+            "BIN": "ملف ثنائي",
+            "ACTION": "إجراء Automator",
+            "COMMAND": "أمر macOS",
+            "CPL": "لوحة تحكم",
+            "GADGET": "أداة Windows",
+            "INS": "ملف التثبيت",
+            "INX": "ملف التثبيت",
+            "ISU": "ملف التثبيت",
+            "JOB": "مهمة مجدولة",
+            "MST": "ملف التعديل",
+            "MSP": "ملف التصحيح",
+            "LNK": "اختصار Windows",
+            "URL": "اختصار الإنترنت",
+            "WEBLOC": "اختصار macOS",
+            "ALIAS": "اختصار macOS",
+            "APPREF-MS": "اختصار ClickOnce",
+            "DESKLINK": "اختصار سطح المكتب",
+            "SHORTCUT": "اختصار عام",
+            "SYMLINK": "رابط رمزي",
+            "JS": "سكريبت JavaScript",
+            "PY": "سكريبت Python",
+            "JAVA": "كود Java",
+            "CPP": "كود C++",
+            "C": "كود C",
+            "CS": "كود C#",
+            "PHP": "سكريبت PHP",
+            "RB": "код Ruby",
+            "GO": "كود Go",
+            "HTML": "صفحة ويب",
+            "HTM": "صفحة ويب",
+            "CSS": "ورقة أنماط",
+            "XML": "لغة التوصيف الموسعة",
+            "JSON": "تنسيق تبادل البيانات",
+            "SQL": "استعلام قاعدة بيانات",
+            "PL": "سكريبت Perl",
+            "PM": "وحدة Perl",
+            "R": "كود R",
+            "SWIFT": "كود Swift",
+            "KT": "كود Kotlin",
+            "VB": "كود Visual Basic",
+            "ASP": "صفحة خادم نشطة",
+            "ASPX": "صفحة خادم نشطة",
+            "JSP": "صفحة خادم Java",
+            "ERB": "صفحة Ruby مدمجة",
+            "TTF": "خط TrueType",
+            "OTF": "خط OpenType",
+            "FNT": "خط Windows",
+            "FON": "خط Windows",
+            "WOFF": "خط ويب مفتوح",
+            "WOFF2": "خط ويب مفتوح",
+            "EOT": "خط مضمن OpenType",
+            "DFONT": "خط macOS",
+            "PFB": "خط Type 1",
+            "PFM": "خط Type 1",
+            "AFM": "خط Type 1",
+            "PFA": "خط Type 1",
+            "DB": "قاعدة بيانات عامة",
+            "SQLITE": "قاعدة بيانات SQLite",
+            "MDB": "قاعدة بيانات Microsoft Access",
+            "ACCDB": "قاعدة بيانات Microsoft Access",
+            "DBF": "قاعدة بيانات xBase",
+            "MDF": "قاعدة بيانات SQL Server",
+            "NDF": "قاعدة بيانات SQL Server",
+            "BAK": "نسخة احتياطية",
+            "DLL": "مكتبة ربط ديناميكي",
+            "SYS": "ملف النظام",
+            "DRV": "برنامج التشغيل",
+            "VXD": "برنامج تشغيل افتراضي",
+            "OCX": "تحكم ActiveX",
+            "TLB": "مكتبة النوع",
+            "OLB": "مكتبة الكائن",
+            "DMP": "ملف الانهيار",
+            "EML": "رسالة بريد إلكتروني",
+            "MSG": "رسالة Outlook",
+            "PST": "مجلد Outlook",
+            "OST": "مجلد Outlook",
+            "MBOX": "صندوق بريد",
+            "EMLX": "رسالة Apple Mail",
+            "VCF": "بطاقة الاتصال",
+            "NSF": "قاعدة بيانات Notes",
+            "OFT": "قالب Outlook",
+            "SAV": "حفظ لعبة",
+            "ROM": "صورة ذاكرة القراءة فقط",
+            "NES": "لعبة Nintendo Entertainment System",
+            "GB": "لعبة Game Boy",
+            "GBC": "لعبة Game Boy Color",
+            "GBA": "لعبة Game Boy Advance",
+            "NDS": "لعبة Nintendo DS",
+            "3DS": "لعبة Nintendo 3DS",
+            "PSX": "لعبة PlayStation",
+            "PS2": "لعبة PlayStation 2",
+            "PSP": "لعبة PlayStation Portable",
+            "INI": "ملف التهيئة",
+            "CFG": "ملف التهيئة",
+            "CONF": "ملف التهيئة",
+            "YAML": "تنسيق بيانات قابل للقراءة",
+            "YML": "تنسيق بيانات قابل للقراءة",
+            "TOML": "تنسيق تهيئة",
+            "TMP": "ملف مؤقت",
+            "BACKUP": "نسخة احتياطية",
+            "RTF": "نص منسق",
+            "FITS": "تنسيق صورة فلكية",
+            "CDF": "تنسيق بيانات علمي",
+            "HDF": "تنسيق بيانات هرمي",
+            "HDF5": "تنسيق بيانات هرمي متقدم",
+            "DICOM": "تنسيق صور طبية",
+            "DCM": "تنسيق صور طبية",
+            "NII": "تنسيق صور عصبية",
+            "NIFTI": "تنسيق صور عصبية",
+            "GGUF": "تنسيق نماذج الذكاء الاصطناعي",
+            "H5": "تنسيق تخزين هرمي للبيانات",
+            "PKL": "نموذج بايثون المُخلد",
+            "PT": "نموذج PyTorch",
+            "PTH": "نموذج PyTorch",
+            "TF": "نموذج TensorFlow",
+            "TFLITE": "نموذج TensorFlow Lite",
+            "ONNX": "تنسيق مفتوح للذكاء الاصطناعي",
+            "ISO": "صورة قرص بصري",
+            "CUE": "ملف وصف القرص",
+            "TORRENT": "ملف تورنت",
+            "CUR": "مؤشر الفأرة",
+            "DWG": "رسم AutoCAD",
+            "DXF": "رسم AutoCAD",
+            "3DS": "رسم 3D Studio",
+            "MAX": "رسم 3ds Max",
+            "BLEND": "رسم Blender",
+            "STL": "رسم Stereolithography",
+            "FBX": "رسم Filmbox",
+            "OBJ": "رسم Wavefront"
+        };
+
+        // ---------- أوصاف إضافية مكملة للصيغ الناقصة ----------
+        const additionalFormatDescriptions = {
+            "386": "ملف مرتبط بإعدادات أو برامج قديمة مصممة لنواة 386 (ملفات تاريخية/نظامية).",
+            "3DM": "نموذج ثلاثي الأبعاد (تنسيق Rhino 3D) للاحتفاظ ببيانات المجسمات.",
+            "3MF": "تنسيق حديث للطباعة ثلاثية الأبعاد يصف المجسم والمواد والدعامات.",
+            "4DB": "قاعدة بيانات أو ملف من نظم قواعد بيانات قديمة مثل 4D/Paradox.",
+            "ACCDE": "نسخة مضمّنة من قاعدة بيانات Access مع تعطيل الكود وقابلية التحرير.",
+            "ACCDR": "قاعدة بيانات Access في وضع التشغيل (Runtime / للعرض فقط).",
+            "ACCDT": "قالب قاعدة بيانات Microsoft Access.",
+            "ALZ": "أرشيف مضغوط (شبيه ZIP) مستخدم في بعض أدوات الضغط، شائع في اليابان.",
+            "AMF": "ملف وصف للطباعة ثلاثية الأبعاد (Additive Manufacturing File).",
+            "ANALYZE": "تنسيق بيانات صور طبية/علمية (مستخدم في علم الأعصاب والتصوير الطبي).",
+            "ANS": "ملفات نصية أو رسائل بتكويد ANSI، قد تستخدم لتخزين نصوص قديمة.",
+            "APPX": "حزمة تطبيق Windows الحديثة (Store/appx package).",
+            "AR": "أرشيف مكتبة برمجية أو ملف أرشيف شائع على أنظمة UNIX.",
+            "ARC": "أرشيف مضغوط قديم (تنسيقات أرشيف كلاسيكية).",
+            "ARW": "صورة RAW من كاميرات Sony — (موجود لديك فعلاً كـ RAW).",
+            "BAK": "نسخة احتياطية لملف (عادة إعادة تسمية احتياطية).",
+            "B5I": "ملف صورة/قرص مرتبط بتطبيقات نسخة/صورة مخصّصة.",
+            "BDF": "تنسيق خط Bitmap (قد يستخدم في أنظمة قديمة أو أجهزة مضمنة).",
+            "BKP": "ملف احتياطي/نسخة احتياطية لبيانات أو إعدادات تطبيق.",
+            "BKF": "نسخة احتياطية لنظام Windows (NTBackup أو شبيه).",
+            "BLEND": "ملف مشروع Blender يحتوي على المشهد، المجسمات، والمواد.",
+            "BRF": "ملف نقطة برايل أو ملف نصي مهيأ لعرض برايل (Braille formatted file).",
+            "BWT": "تنسيق صورة قرص مضغوط/بيانات خاص ببعض أدوات الأرشفة.",
+            "CAB": "أرشيف Microsoft Cabinet لحزم تثبيت البرامج والمكونات.",
+            "CDDA": "بيانات صوت CD (Compact Disc Digital Audio).",
+            "CUE": "ملف وصف صورة قرص (Cue sheet) يرافق ملفات ISO/BIN.",
+            "CRDOWNLOAD": "ملف تنزيل جزئي من متصفح Chrome (قيد التحميل أو متوقف).",
+            "CRX": "امتداد Chrome (ملف إضافة لمتصفح Google Chrome).",
+            "CRW": "ملف RAW من كاميرات Canon (إصدارات أقدم من CR2).",
+            "CRT": "ملف شهادة (certificate) أو ملف نصي قد يحمل بيانات تشفير.",
+            "CSV": "قيم مفصولة بفواصل — جدول نصي قابل للاستيراد في قواعد البيانات/الجداول.",
+            "CUR": "مؤشر فأرة ثابت (cursor) — أيقونة المؤشر.",
+            "CVS": "قاعدة/ملف نسخ أو اسم مرتبط بالأرشفة/أنظمة تحكم بالإصدار.",
+            "DAA": "صورة قرص مضغوطة مع دعم الضغط (PowerISO/Daemon).",
+            "DAE": "ملف Collada لنماذج ثلاثية الأبعاد (مشاهد ومنهجية تبادل 3D).",
+            "DB3": "قاعدة بيانات SQLite/DB محمولة (نسخة بامتداد DB3).",
+            "DBX": "ملف بريد قديم لـ Outlook Express أو ملف بيانات صندوق بريد.",
+            "DDS": "ملف صورة مضغوط لرسومات الألعاب (DirectDraw Surface) يدعم الـ mipmaps.",
+            "DIF": "تنسيق تبادل بيانات للسبريدشيتس (Data Interchange Format).",
+            "DNG": "تنسيق صورة RAW مفتوح من Adobe (Digital Negative).",
+            "DMG": "صورة قرص macOS تستخدم لتوزيع التطبيقات والملفات.",
+            "DOL": "ملف تنفيذ/تنفيذي لألعاب أو برامج على أنظمة أجهزة قديمة (مثل GameCube/Wii).",
+            "DPX": "ملف إطار رقمي عالي الجودة مستخدم في السينما والأفلام الرقمية.",
+            "DRV": "ملف برنامج تشغيل (driver) لنظام التشغيل.",
+            "DSS": "ملف صوتي/تسجيل dictation (نُسخ الملفات الصوتية للتدوين).",
+            "DTD": "تعريف نوع مستند XML (Document Type Definition).",
+            "DTS": "تنسيق صوتي متعدد القنوات (Dolby DTS) — جودة سينمائية.",
+            "DWG": "رسم AutoCAD الأصلي — ملفات تصميم ونمذجة CAD.",
+            "DXF": "تنسيق تبادل رسومات AutoCAD (ASCII أو ثنائي) للتبادل بين برامج CAD.",
+            "EXR": "صورة HDR (OpenEXR) عالية الديناميكية للصور الاحترافية.",
+            "F4A": "ملف صوت مرتبط بمنصات Flash/ميديا Adobe.",
+            "F4B": "ملف صوت للكتب المسموعة في نظام Adobe/Flash.",
+            "F4P": "ميديا Flash محمية بحقوق DRM (F4P).",
+            "F4V": "فيديو Flash (حاوية فيديو لـ Flash Player).",
+            "FB2": "تنسيق كتاب إلكتروني (FictionBook) شائع في المراجعات الرقمية.",
+            "FITS": "تنسيق صور علمية (Astronomy FITS) لصور الفضاء والبيانات الفلكية.",
+            "FLA": "مشروع Adobe Flash (قابل للتحرير في Animate/Flash).",
+            "FM5": "ملف مشروع FileMaker أو إصدارات قواعد بيانات مماثلة.",
+            "FP5": "ملف قاعدة بيانات أو مشروع لبرمجيات قديمة (مثل FoxPro).",
+            "FP7": "نسخة أحدث لملفات قواعد بيانات/مشروعات (تبع التطبيق).",
+            "GHO": "صورة Norton Ghost — ملف نسخ احتياطي كامل للنظام.",
+            "GZ": "أرشيف مضغوط بـ gzip (غالبًا مع tar كـ .tar.gz).",
+            "HDF": "تنسيق بيانات هرمي (HDF) لتخزين مجموعات بيانات علمية كبيرة.",
+            "HDF5": "نسخة متطورة من HDF تدعم مجموعات بيانات كبيرة ومعقدة.",
+            "HL7": "رسائل/ملفات تبادل معلومات طبية (معيار HL7).",
+            "HTML": "صفحة ويب بتنسيق HTML.",
+            "HTM": "نسخة مختصرة من HTML — صفحة ويب.",
+            "ICO": "أيقونة صغيرة تُستخدم لنوافذ/ملفات النظام.",
+            "ICS": "ملف جدول زمني/تقويم (iCalendar) للاستيراد في التقويمات.",
+            "IDX": "فهرس أو ملف وصف لوسائط/قواعد بيانات.",
+            "IFF": "تنسيق ملفات تبادل (Interchange File Format) لوسائط متعددة.",
+            "IGES": "تنسيق تبادل هندسي للنماذج CAD/CAE.",
+            "IMG": "صورة قرص أو صورة نظام (قد تكون ISO أو BIN).",
+            "INDD": "مشروع Adobe InDesign (تصميم مطبوعات ومواد).",
+            "INI": "ملف تهيئة بسيط لتطبيقات Windows أو برامج أخرى.",
+            "INO": "ملف مشروع Arduino (Sketch) لمتحكمات.",
+            "ISO": "صورة قرص بصيغة ISO تُستخدم لتوزيع أنظمة أو برامج.",
+            "JAR": "أرشيف Java يحتوي ملفات .class وموارد التطبيق.",
+            "JPG": "صورة مضغوطة بخسارة (مدرج سابقاً لكن شائع).",
+            "JS": "سكريبت JavaScript لتشغيل على المتصفح أو السيرفر.",
+            "JSP": "صفحة خادم JavaServer Pages — صفحات ديناميكية على الخادم.",
+            "KML": "تنسيق بيانات جغرافية (Google Earth/KML).",
+            "KMZ": "نسخة مضغوطة من KML (KML ZIP).",
+            "LDF": "ملف سجل أو قاعدة بيانات (Log/SQL Server LDF).",
+            "LNK": "اختصار Windows — رابط لمكان ملف/برنامج.",
+            "LOG": "ملف سجل لأنشطة تطبيق أو نظام.",
+            "LZO": "أرشيف مضغوط بخوارزمية LZO للسرعة في الضغط/فك الضغط.",
+            "M2TS": "حاوية فيديو عالية الجودة لأقراص Blu-ray/AVCHD.",
+            "MA": "مشروع Maya أو ملف مشهد ثلاثي الأبعاد (Autodesk Maya).",
+            "MAP": "خريطة/فهرس أو ملف تخطيط (تبع التطبيق).",
+            "MAR": "حزمة تحديث/أرشيف للتوزيعات أو متصفحات (مثال: Mozilla MAR).",
+            "MAX": "ملف مشروع 3ds Max يحتوي مشهد ونماذج ومواد.",
+            "MB": "ملف مشروع Maya أو ملفات مشروع أخرى (قد يختلف حسب التطبيق).",
+            "MBOX": "صندوق بريد (mailbox) يحتوي رسائل بريد بصيغة نصية متسلسلة.",
+            "MD": "مستند Markdown — تنسيق توثيق خفيف الوزن.",
+            "MDF": "ملف قاعدة بيانات SQL Server أو صورة قرص (حسب السياق).",
+            "MIDI": "ملف آلات موسيقية/بيانو رقمي يحتوي بيانات أداء MIDI.",
+            "MOBI": "تنسيق كتاب إلكتروني (Mobipocket)، يستخدم في أجهزة Kindle القديمة.",
+            "MPC": "ملف صوت مضغوط (MusePack) لملفات صوتية بجودة جيدة.",
+            "MPP": "مشروع Microsoft Project (تخطيط وجدولة المشاريع).",
+            "MTL": "ملف مادة (material) يرافق نموذج OBJ لتعريف الخامات.",
+            "MXF": "حاوية وسائط احترافية للفيديو والبث (Material eXchange Format).",
+            "NDS": "صورة/ملف لعبة Nintendo DS أو بيانات محاكي.",
+            "NFO": "معلومات/وصف ملف غالبًا ما يرفق توزيعات أو أرشيفات.",
+            "NRG": "صورة قرص من Nero (ملف قرص مضغوط).",
+            "NSF": "قاعدة بيانات Lotus Notes/ملف صندوق بريد Domino.",
+            "NUPKG": "حزمة NuGet (.nupkg) لإدارة الحزم في .NET.",
+            "OBJ": "نموذج ثلاثي الأبعاد بصيغة Wavefront OBJ (قابل للنقل).",
+            "ODS": "جدول OpenDocument (LibreOffice/OpenOffice Calc).",
+            "ONE": "ملف Microsoft OneNote لتخزين ملاحظات منظمة.",
+            "OPJ": "ملف مشروع لبرامج تحليل/علمية مثل Origin.",
+            "OPUS": "تنسيق صوت حديث عالي الكفاءة للويب والمحادثات.",
+            "ORA": "ملف متعلق بقاعدة بيانات Oracle أو مخرجات Oracle.",
+            "OTF": "خط OpenType — يدعم ميزات متقدمة للخطوط.",
+            "OUT": "ملف إخراج ترجمة/ربط أو ملف ناتج لبرنامج ما.",
+            "P7S": "ملف توقيع رقمي (PKCS7 signature) يرافق رسائل/مستندات مشفّرة.",
+            "PAB": "ملف جهات اتصال Outlook القديم (Personal Address Book).",
+            "PAQ": "صيغة ضغط/أرشفة عالية الكفاءة (PAQ family).",
+            "PDF": "مذكور سابقًا؛ مستند Portable Document Format القابل للطباعة والعرض.",
+            "PEZ": "عرض من Prezi أو ملف مشروع Prezi (عرض تفاعلي).",
+            "PFX": "حزمة شهادات/مفتاح خاص (Personal Information Exchange).",
+            "PGM": "صورة Portable Graymap — صورة رمادية بسيطة.",
+            "PKG": "حزمة مثبت لتوزيعات Unix/macOS أو مثبتات برامج.",
+            "PL": "سكريبت Perl أو ملف تعليمة بلغة Perl.",
+            "PM": "وحدة Perl (Perl Module) أو ملف مرتبط بإدارة الحزم.",
+            "POD": "مستند توثيق (Perl POD) أو مكونات وثائقية.",
+            "PPA": "إضافة PowerPoint (PowerPoint Add-in).",
+            "PPS": "عرض PowerPoint كملف slideshow قابل للتشغيل مباشرة.",
+            "PRF": "ملف إعدادات/تكوين لتطبيقات البريد/Outlook profile.",
+            "PRJ": "ملف مشروع عام لتطبيقات التطوير أو التصميم.",
+            "PRPROJ": "مشروع Adobe Premiere — يحتوي إعدادات تسلسل وميديا.",
+            "PS1": "نص PowerShell (ملف سكربت لنظام Windows PowerShell).",
+            "PST": "مجلد Outlook PST — صندوق بريد محلي ومجلدات المستخدم.",
+            "PTH": "نموذج PyTorch أو ملفات نقاط حفظ للنماذج.",
+            "PUB": "ملف Microsoft Publisher لتصميم المطبوعات والنشرات.",
+            "PY": "سكريبت Python — ملف كود بلغة Python.",
+            "QDW": "ملف Quattro Pro/مجموعة بيانات جداول قديمة.",
+            "RAR": "أرشيف مضغوط شائع الاستخدام (WinRAR).",
+            "RB": "ملف كود Ruby أو سكربت Ruby.",
+            "RDB": "قاعدة بيانات مضغوطة أو ملف بيانات تطبيق.",
+            "REG": "ملف تسجيل Windows لتعديل Registry (تبع الحذر عند الاستخدام).",
+            "RM": "حاوية RealMedia للوسائط (قد تكون صوت أو فيديو).",
+            "RMVB": "نفس RealMedia لكن بمعدل بت متغير (متغير المعدل).",
+            "ROM": "صورة ذاكرة للعب أو ذاكرة قراءة فقط (ألعاب/أنظمة قديمة).",
+            "RPM": "حزمة تثبيت توزيعات Red Hat/Fedora (RPM package).",
+            "RTF": "نص منسق (Rich Text Format) يدعم أنماط النصوص الأساسية.",
+            "RVT": "ملف مشروع Autodesk Revit للنمذجة المعمارية/الهندسية.",
+            "SAV": "حفظ حالة لعبة أو ملف حفظ لتطبيقات الألعاب.",
+            "SCF": "ملف شل أمر (Shell Command File) في Windows.",
+            "SCR": "شاشة توقف (Screensaver) أو سكربت لحزم تثبيت.",
+            "SDC": "ملف جدول (StarCalc) أو جدول بيانات حزمة StarOffice.",
+            "SIT": "أرشيف StuffIt (macOS، تنسيق ضغط قديم).",
+            "SITX": "نسخة حديثة من أرشيف StuffIt مضغوط.",
+            "SKP": "مشروع SketchUp لنماذج ومشاهد 3D.",
+            "SLK": "تنسيق تبادل بيانات جدولي (SYLK) لنقل الجداول بين التطبيقات.",
+            "SMC": "صورة لعبة/ROM لمنصات SNES/Super Nintendo.",
+            "SO": "مكتبة مشاركة على Unix/Linux (Shared Object).",
+            "SRT": "ملف ترجمة/ترجمة نصية للفيديو (SubRip Subtitle).",
+            "STL": "ملف نموذج ثلاثي الأبعاد للطباعة (STL).",
+            "STP": "ملف CAD/STEP لنقل النماذج الهندسية ثلاثية الأبعاد.",
+            "SVG": "صورة متجهية قابلة للتوسع (Scalable Vector Graphics).",
+            "SWF": "ملف Flash (Flash animation أو تطبيق Flash قديم).",
+            "TAR": "تنسيق أرشيف يونكس (عادة يستخدم مع gzip -> .tar.gz).",
+            "TEX": "مستند LaTeX (ملفات مصدر للنشر العلمي والطباعة).",
+            "THMX": "قالب تصميم PowerPoint (Themes used by PowerPoint).",
+            "TIF": "صورة TIFF عالية الجودة للطباعة أو الصور الممسوحة ضوئياً.",
+            "TMP": "ملف مؤقت يُستخدم أثناء تشغيل التطبيقات أو التنزيلات.",
+            "TORRENT": "ملف وصف تنزيل عبر بروتوكول BitTorrent (معلومات التورنت).",
+            "TOML": "تنسيق تهيئة حديث قابل للقراءة (TOML).",
+            "TTC": "حزمة خطوط (TrueType Collection) تحتوي عدة خطوط في ملف واحد.",
+            "TTF": "خط TrueType — شائع في أنظمة التشغيل للعرض والطباعة.",
+            "TXT": "ملف نص عادي (Plain text).",
+            "UDF": "تنسيق نظام ملفات للأقراص أو تعريف بيانات (Universal Disk Format).",
+            "UFO": "تنسيق مصدر خطوط موحد (Unified Font Object).",
+            "VHD": "قرص افتراضي (Virtual Hard Disk) يُستخدم في الحوسبة الافتراضية.",
+            "VMDK": "قرص افتراضي لـ VMware (Virtual Machine Disk).",
+            "VRML": "تنسيق رسومات ثلاثية الأبعاد للويب (Virtual Reality Modeling Language).",
+            "WB1": "ملف جدول Lotus or WordPerfect/spreadsheet قديم.",
+            "WEBP": "صيغ صور حديثة مضغوطة للويب بجودة عالية وحجم أقل.",
+            "WKS": "ملف جدول من حزم قديمة مثل Lotus/Works.",
+            "WMA": "حاوية صوت من Microsoft (Windows Media Audio).",
+            "WMV": "حاوية فيديو Microsoft (Windows Media Video).",
+            "WOFF": "خط ويب مضغوط لصفحات الويب (Web Open Font Format).",
+            "WOFF2": "إصدار محسّن من WOFF لضغط أفضل على الويب.",
+            "WPD": "مستند WordPerfect.",
+            "WPP": "ملف عرض Microsoft Works/PowerPoint Package (عرض شرائح).",
+            "XLSM": "كتاب Excel يحتوي ماكرو (Macro-enabled workbook).",
+            "XLSB": "كتاب Excel بصيغة ثنائية (Binary workbook).",
+            "XLSX": "كتاب Excel بنسق Office Open XML.",
+            "XML": "لغة توصيف موسعة — تُستخدم لتبادل البيانات.",
+            "XPI": "حزمة امتداد (مثل إضافات قديمة لمتصفحات Mozilla).",
+            "XPS": "مستند XML Paper Specification — بديل لـ PDF من Microsoft.",
+            "XZ": "أرشيف مضغوط باستخدام خوارزمية xz (ضغط فعّال).",
+            "YAML": "تنسيق بيانات قابل للقراءة (YAML) لملفات التهيئة.",
+            "YML": "نسخة مختصرة من YAML (نفس الاستخدام كالـ YAML).",
+            "Z": "أرشيف مضغوط بتقنية compress (Unix).",
+            "ZPAQ": "تنسيق أرشيف عالي الكفاءة واسترجاع للنسخ الاحتياطية.",
+            "ZZ": "امتداد يدل على أرشيف عالي الضغط أو مخصص(تبع الأداة)."
+        };
+
+        // دمج الأوصاف الإضافية مع الأوصاف الأصلية
+        Object.assign(formatDescriptions, additionalFormatDescriptions);
+
+        // ---------- دالة توليد أوصاف موثوقة لأي صيغة ناقصة ----------
+        function generateDescription(format, type) {
+            // نعطي وصفاً موجزاً وعملياً حسب الفئة بدل النص العام "وصف لصيغة ..."
+            switch(type) {
+                case "فيديو":
+                    return `${format} — تنسيق فيديو يُستخدم لحفظ أو بث ملفات الفيديو؛ خصائصه (حاوية وترميز ودعم الدقة) تختلف حسب الأدوات والأجهزة.`;
+                case "صور":
+                    return `${format} — تنسيق صورة رقمي يستخدم لتخزين صور نقطية أو متجهية؛ قد يدعم الشفافية أو بيانات RAW حسب النوع.`;
+                case "صوت":
+                    return `${format} — تنسيق صوتي لتخزين تسجيلات أو مسارات صوتية؛ قد يكون مضغوطًا بفقد أو بدون فقد أو يدعم قنوات متعددة.`;
+                case "مستندات":
+                    return `${format} — تنسيق مستند يُستخدم للنصوص أو المنشورات أو الكتاب الإلكتروني؛ يدعم الطباعة أو التحرير أو التدقيق حسب النوع.`;
+                case "جداول":
+                    return `${format} — تنسيق جداول وبيانات يستخدم لتخزين أوراق حسابية أو تبادل بيانات بين برامج الجداول.`;
+                case "عروض":
+                    return `${format} — تنسيق عروض تقديمية يحتوي شرائح ونصوص ووسائط مدمجة لعرض المحتوى أمام الجمهور.`;
+                case "ملفات مضغوطة":
+                    return `${format} — تنسيق أرشيف/ضغط يُستخدم لتجميع وضغط ملفات لتسهيل النقل أو التخزين.`;
+                case "تنفيذية":
+                    return `${format} — ملف تنفيذي أو حزمة تثبيت يُشغّل أو يثبّت برامج على نظام التشغيل.`;
+                case "اختصارات":
+                    return `${format} — ملف اختصار أو رابط يُشير إلى ملف أو مورد آخر لتسريع الوصول.`;
+                case "أكواد":
+                    return `${format} — ملف كود أو سكربت يحتوي تعليمات بلغة برمجة (قد يُستخدم في التطوير أو التشغيل).`;
+                case "خطوط":
+                    return `${format} — ملف خط يُعرّف أشكال الحروف لاستخدامها في الطباعة أو على الويب.`;
+                case "قواعد بيانات":
+                    return `${format} — ملف بيانات أو قاعدة يخزن جداول وسجلات تُستخدم بواسطة تطبيقات قواعد البيانات.`;
+                case "أنظمة":
+                    return `${format} — ملف نظام أو مكتبة يدعم وظائف النظام أو الأجهزة مثل برامج التشغيل والمكتبات المشتركة.`;
+                case "بريد إلكتروني":
+                    return `${format} — ملف بريد أو صندوق بريد يخزن رسائل ومرفقات يمكن استيرادها أو فتحها بواسطة عملاء البريد.`;
+                case "ألعاب":
+                    return `${format} — ملف ألعاب أو صورة ROM مرتبط بمنصات ألعاب أو محاكيات ويحتوي بيانات تشغيل اللعبة أو حفظها.`;
+                case "ويب":
+                    return `${format} — ملف ويب يستخدم لبناء صفحات ومكونات الويب (صفحات، سكربتات، موارد، خطوط).`;
+                case "تهيئة":
+                    return `${format} — ملف تهيئة/إعدادات يخزن خيارات تشغيل أو إعدادات تطبيق أو نظام.`;
+                case "نسخ احتياطي":
+                    return `${format} — ملف نسخة احتياطية يُستخدم لحفظ بيانات قابلة للاسترجاع عند الحاجة.`;
+                case "نصوص":
+                    return `${format} — ملف نصي يحتوي محتوى نصي خام أو منسق يُستخدم للوثائق أو السجلات.`;
+                case "علمية":
+                    return `${format} — ملف بيانات أو نتائج بحث تُستخدم في التطبيقات العلمية أو التحليلية.`;
+                case "طبية":
+                    return `${format} — ملف طبي متخصص لتخزين صور أو سجلات طبية قابلة للمعالجة في أنظمة طبية.`;
+                case "نماذج ذكاء اصطناعي":
+                    return `${format} — ملف نموذج أو أوزان لنماذج تعلم الآلة يُستخدم للتحميل أو التشغيل في بيئات الذكاء الاصطناعي.`;
+                case "اسطوانات مضغوطة":
+                    return `${format} — صورة قرص أو ملف وصف قرص يُستخدم لتركيب أو حرق وسيط بصري (CD/DVD/BD).`;
+                default:
+                    return `${format} — تنسيق عام يُستخدم لتخزين نوع محدد من البيانات أو لاحتياجات تطبيقات متخصصة.`;
+            }
+        }
+
+        // ---------- إنشاء بيانات الصيغ ----------
+        const formatsData = [];
+        const commonLevels = ["شائع", "متوسط", "نادر"];
+        
+        // إضافة الصيغ الحقيقية فقط، واستبدال أي وصف افتراضي بوصف مولَّد حسب الفئة
+        Object.entries(formatExamples).forEach(([type, formats]) => {
+            formats.forEach((format) => {
+                const existing = formatDescriptions[format];
+                // إذا كانت موجودة استخدمها، وإلا أنشئ وصفاً مولداً يعتمد على الفئة
+                const description = existing && !existing.toString().startsWith("وصف لصيغة")
+                    ? existing
+                    : generateDescription(format, type);
+                formatsData.push({
+                    format: format,
+                    type: type,
+                    description: description,
+                    common: commonLevels[Math.floor(Math.random() * commonLevels.length)]
+                });
+            });
+        });
+
+        // ---------- إنشاء إحصائيات ----------
+        const stats = {};
+        Object.keys(formatExamples).forEach(type => {
+            stats[type] = formatsData.filter(item => item.type === type).length;
+        });
+
+        // ملء صفوف الإحصائيات
+        const statsRow = document.getElementById('statsRow');
+        for (const [type, count] of Object.entries(stats)) {
+            let iconClass, bgColor;
+            
+            switch(type) {
+                case "فيديو": 
+                    iconClass = "fas fa-video"; 
+                    bgColor = "bg-danger";
+                    break;
+                case "صور": 
+                    iconClass = "fas fa-image"; 
+                    bgColor = "bg-success";
+                    break;
+                case "صوت": 
+                    iconClass = "fas fa-music"; 
+                    bgColor = "bg-warning";
+                    break;
+                case "مستندات": 
+                    iconClass = "fas fa-file-alt"; 
+                    bgColor = "bg-info";
+                    break;
+                case "جداول": 
+                    iconClass = "fas fa-table"; 
+                    bgColor = "bg-purple";
+                    break;
+                case "عروض": 
+                    iconClass = "fas fa-file-powerpoint"; 
+                    bgColor = "bg-orange";
+                    break;
+                case "ملفات مضغوطة": 
+                    iconClass = "fas fa-file-archive"; 
+                    bgColor = "bg-teal";
+                    break;
+                case "تنفيذية": 
+                    iconClass = "fas fa-cogs"; 
+                    bgColor = "bg-dark";
+                    break;
+                case "اختصارات": 
+                    iconClass = "fas fa-link"; 
+                    bgColor = "bg-cyan";
+                    break;
+                case "أكواد": 
+                    iconClass = "fas fa-code"; 
+                    bgColor = "bg-primary";
+                    break;
+                case "خطوط": 
+                    iconClass = "fas fa-font"; 
+                    bgColor = "bg-pink";
+                    break;
+                case "قواعد بيانات": 
+                    iconClass = "fas fa-database"; 
+                    bgColor = "bg-indigo";
+                    break;
+                case "أنظمة": 
+                    iconClass = "fas fa-cog"; 
+                    bgColor = "bg-secondary";
+                    break;
+                case "بريد إلكتروني": 
+                    iconClass = "fas fa-envelope"; 
+                    bgColor = "bg-success";
+                    break;
+                case "ألعاب": 
+                    iconClass = "fas fa-gamepad"; 
+                    bgColor = "bg-brown";
+                    break;
+                case "ويب": 
+                    iconClass = "fas fa-globe"; 
+                    bgColor = "bg-web";
+                    break;
+                case "تهيئة": 
+                    iconClass = "fas fa-cog"; 
+                    bgColor = "bg-config";
+                    break;
+                case "نسخ احتياطي": 
+                    iconClass = "fas fa-save"; 
+                    bgColor = "bg-backup";
+                    break;
+                case "نصوص": 
+                    iconClass = "fas fa-file-alt"; 
+                    bgColor = "bg-text";
+                    break;
+                case "علمية": 
+                    iconClass = "fas fa-flask"; 
+                    bgColor = "bg-science";
+                    break;
+                case "طبية": 
+                    iconClass = "fas fa-heartbeat"; 
+                    bgColor = "bg-medical";
+                    break;
+                case "نماذج ذكاء اصطناعي": 
+                    iconClass = "fas fa-brain"; 
+                    bgColor = "bg-primary";
+                    break;
+                case "اسطوانات مضغوطة": 
+                    iconClass = "fas fa-compact-disc"; 
+                    bgColor = "bg-warning";
+                    break;
+                default: 
+                    iconClass = "fas fa-file"; 
+                    bgColor = "bg-secondary";
+            }
+            
+            statsRow.innerHTML += `
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3">
+                    <div class="card stats-card ${bgColor} text-white">
+                        <div class="card-body text-center">
+                            <i class="${iconClass} fa-2x mb-2"></i>
+                            <h5>${count}</h5>
+                            <p class="mb-0">${type}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ---------- تهيئة DataTable ----------
+        $(document).ready(function() {
+            const table = $('#formatsTable').DataTable({
+                data: formatsData,
+                columns: [
+                    { 
+                        data: 'format',
+                        render: function(data, type, row) {
+                            // عرض صورة إن وُجدت في formatIcons، وإلا عرض الحرفين الأولين داخل badge
+                            const imgSrc = formatIcons[data];
+                            let iconHtml;
+                            if (imgSrc) {
+                                iconHtml = `<span class="format-icon"><img src="${imgSrc}" alt="${data}"></span>`;
+                            } else {
+                                iconHtml = `<span class="format-icon">${data.substring(0, 2)}</span>`;
+                            }
+                            return `${iconHtml}${data}`;
+                        }
+                    },
+                    { 
+                        data: 'type',
+                        render: function(data, type, row) {
+                            let badgeClass = 'badge-other';
+                            if (data === 'فيديو') badgeClass = 'badge-video';
+                            else if (data === 'صور') badgeClass = 'badge-image';
+                            else if (data === 'صوت') badgeClass = 'badge-audio';
+                            else if (data === 'مستندات') badgeClass = 'badge-document';
+                            else if (data === 'جداول') badgeClass = 'badge-spreadsheet';
+                            else if (data === 'عروض') badgeClass = 'badge-presentation';
+                            else if (data === 'ملفات مضغوطة') badgeClass = 'badge-archive';
+                            else if (data === 'تنفيذية') badgeClass = 'badge-executable';
+                            else if (data === 'اختصارات') badgeClass = 'badge-shortcut';
+                            else if (data === 'أكواد') badgeClass = 'badge-code';
+                            else if (data === 'خطوط') badgeClass = 'badge-font';
+                            else if (data === 'قواعد بيانات') badgeClass = 'badge-database';
+                            else if (data === 'أنظمة') badgeClass = 'badge-system';
+                            else if (data === 'بريد إلكتروني') badgeClass = 'badge-email';
+                            else if (data === 'ألعاب') badgeClass = 'badge-game';
+                            else if (data === 'ويب') badgeClass = 'badge-web';
+                            else if (data === 'تهيئة') badgeClass = 'badge-config';
+                            else if (data === 'نسخ احتياطي') badgeClass = 'badge-backup';
+                            else if (data === 'نصوص') badgeClass = 'badge-text';
+                            else if (data === 'علمية') badgeClass = 'badge-science';
+                            else if (data === 'طبية') badgeClass = 'badge-medical';
+                            else if (data === 'نماذج ذكاء اصطناعي') badgeClass = 'badge-ai';
+                            else if (data === 'اسطوانات مضغوطة') badgeClass = 'badge-disk';
+                            else badgeClass = 'badge-other';
+                            
+                            return `<span class="category-badge ${badgeClass}">${data}</span>`;
+                        }
+                    },
+                    { data: 'description' },
+                    { 
+                        data: 'common',
+                        render: function(data, type, row) {
+                            let icon = '';
+                            if (data === 'شائع') icon = '<i class="fas fa-fire text-danger me-1"></i>';
+                            else if (data === 'متوسط') icon = '<i class="fas fa-star text-warning me-1"></i>';
+                            else icon = '<i class="fas fa-eye text-secondary me-1"></i>';
+                            
+                            return `${icon} ${data}`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/ar.json'
+                },
+                pageLength: 25,
+                responsive: true,
+                ordering: true,
+                order: [[3, 'asc']]
+            });
+            
+            // البحث العام
+            $('#globalSearch').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+            
+            // الفلترة حسب النوع
+            $('.filter-btn').on('click', function() {
+                const filter = $(this).data('filter');
+                $('.filter-btn').removeClass('active');
+                $(this).addClass('active');
+                
+                if (filter === 'all') {
+                    table.columns(1).search('').draw();
+                } else {
+                    table.columns(1).search(filter).draw();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    
